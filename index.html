@@ -185,11 +185,7 @@
   var fireballSize = 22;
   var getFireballSpeed = function (left) {
     var fireballSpeed;
-    if (left) {
-      fireballSpeed = 5;
-    } else {
-      fireballSpeed = 2;
-    }
+    left ? fireballSpeed = 5 : fireballSpeed = 2;
 
     return fireballSpeed;
   }
