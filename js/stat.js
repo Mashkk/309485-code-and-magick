@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 var CLOUD_WIDTH = 420;
 var CLOUD_HEIGHT = 270;
@@ -14,19 +14,19 @@ var BAR_GAP = 50;
 var yBarStart = CLOUD_HEIGHT - (Y_GAP * 1.5 + MAX_BAR_HEIGHT);
 
 
-var renderRect = function(ctx, opts) {
+var renderRect = function (ctx, opts) {
   ctx.fillStyle = opts.color;
   ctx.fillRect(opts.x, opts.y, opts.width, opts.heigth);
 };
 
-var renderText = function(ctx, opts) {
-  ctx.fillStyle = "#000";
-  ctx.font = "16px PT Mono";
-  ctx.textBaseline = "hanging";
+var renderText = function (ctx, opts) {
+  ctx.fillStyle = '#000';
+  ctx.font = '16px PT Mono';
+  ctx.textBaseline = 'hanging';
   ctx.fillText(opts.text, opts.x, opts.y);
-}
+};
 
-var getMaxElement = function(arr) {
+var getMaxElement = function (arr) {
   var maxElement = arr[0];
 
   for (var i = 0; i < arr.length; i++) {
@@ -38,41 +38,41 @@ var getMaxElement = function(arr) {
   return maxElement;
 };
 
-function getRandomNumber(min, max) {
+function getRandomNumber (min, max) {
   var rand = min - 0.5 + Math.random() * (max - min + 1);
   rand = Math.round(rand);
   return rand;
 }
 
-var getColor = function(name) {
-  return name.toLowerCase() === "вы" ? "rgb(255, 0, 0, 1)" : "rgb(0, 0," + getRandomNumber(100, 255) +")";
-}
+var getColor = function (name) {
+  return name.toLowerCase() === 'вы' ? 'rgb(255, 0, 0, 1)' : 'rgb(0, 0,' + getRandomNumber(100, 255) + ')';
+};
 
 window.renderStatistics = function(ctx, names, times) {
   renderRect(ctx, {
-    x:CLOUD_X + GAP,
+    x: CLOUD_X + GAP,
     y: CLOUD_Y + GAP,
-    color:"rgba(0, 0, 0, 0.7)",
+    color: 'rgba(0, 0, 0, 0.7)',
     width: CLOUD_WIDTH,
     heigth: CLOUD_HEIGHT
   });
 
   renderRect(ctx, {
-    x:CLOUD_X,
+    x: CLOUD_X,
     y: CLOUD_Y,
-    color: "rgba(255, 255, 255, 1)",
+    color: 'rgba(255, 255, 255, 1)',
     width: CLOUD_WIDTH,
     heigth: CLOUD_HEIGHT
   });
 
   renderText(ctx, {
-    text: "Ура вы победили!",
+    text: 'Ура вы победили!',
     x: CLOUD_X + Y_GAP,
     y: Y_GAP
   });
 
   renderText(ctx, {
-    text: "Список результатов:",
+    text: 'Список результатов:',
     x: CLOUD_X + Y_GAP,
     y: Y_GAP * 1.8
   });
