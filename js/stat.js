@@ -9,10 +9,14 @@ var MAX_BAR_HEIGHT = 150;
 var BAR_WIDTH = 40;
 
 var GAP = 10;
+var TEXT_GAP = 20;
 var Y_GAP = 25;
 var BAR_GAP = 50;
 var yBarStart = CLOUD_HEIGHT - (Y_GAP * 1.5 + MAX_BAR_HEIGHT);
 
+var FONT = '16px PT Mono';
+var FONT_COLOR = '#000';
+var TEXT_BASELINE = 'hanging';
 
 var renderRect = function (ctx, opts) {
   ctx.fillStyle = opts.color;
@@ -20,22 +24,17 @@ var renderRect = function (ctx, opts) {
 };
 
 var renderText = function (ctx, opts) {
-  ctx.fillStyle = '#000';
-  ctx.font = '16px PT Mono';
-  ctx.textBaseline = 'hanging';
-  ctx.fillText(opts.text, opts.x, opts.y);
+  opts.text.split('\n').forEach(function (line, i) {
+    ctx.fillStyle = FONT_COLOR;
+    ctx.font = FONT;
+    ctx.textBaseline = TEXT_BASELINE;
+    ctx.fillText(line, opts.x, opts.y + TEXT_GAP * i);
+  });
+
 };
 
 var getMaxElement = function (arr) {
-  var maxElement = arr[0];
-
-  for (var i = 0; i < arr.length; i++) {
-    if (arr[i] > maxElement) {
-      maxElement = arr[i];
-    }
-  }
-
-  return maxElement;
+  return Math.max.apply(null, arr);
 };
 
 function getRandomNumber(min, max) {
@@ -45,10 +44,11 @@ function getRandomNumber(min, max) {
 }
 
 var getColor = function (name) {
-  return name.toLowerCase() === 'вы' ? 'rgb(255, 0, 0, 1)' : 'rgb(0, 0,' + getRandomNumber(100, 255) + ')';
+  return name.toLowerCase() === 'вы' ? 'rgba(255, 0, 0, 1)' : 'rgba(0, 0,' + getRandomNumber(100, 255) + ', 1)';
 };
 
 window.renderStatistics = function (ctx, names, times) {
+  console.log(JSON.stringify({names, times}))
   renderRect(ctx, {
     x: CLOUD_X + GAP,
     y: CLOUD_Y + GAP,
@@ -66,15 +66,9 @@ window.renderStatistics = function (ctx, names, times) {
   });
 
   renderText(ctx, {
-    text: 'Ура вы победили!',
+    text: 'Ура вы победили!\nСписок результатов:',
     x: CLOUD_X + Y_GAP,
     y: Y_GAP
-  });
-
-  renderText(ctx, {
-    text: 'Список результатов:',
-    x: CLOUD_X + Y_GAP,
-    y: Y_GAP * 1.8
   });
 
   var maxTime = getMaxElement(times);
@@ -91,9 +85,9 @@ window.renderStatistics = function (ctx, names, times) {
     });
 
     renderText(ctx, {
-      text: Math.round(times[i]),
+      text: Math.round(times[i]) + "",
       x: x,
-      y: y - GAP * 1.8
+      y: y - TEXT_GAP
     });
 
     renderRect(ctx, {
