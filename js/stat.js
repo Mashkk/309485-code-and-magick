@@ -38,7 +38,7 @@ var getMaxElement = function (arr) {
   return maxElement;
 };
 
-function getRandomNumber (min, max) {
+function getRandomNumber(min, max) {
   var rand = min - 0.5 + Math.random() * (max - min + 1);
   rand = Math.round(rand);
   return rand;
@@ -48,7 +48,7 @@ var getColor = function (name) {
   return name.toLowerCase() === 'вы' ? 'rgb(255, 0, 0, 1)' : 'rgb(0, 0,' + getRandomNumber(100, 255) + ')';
 };
 
-window.renderStatistics = function(ctx, names, times) {
+window.renderStatistics = function (ctx, names, times) {
   renderRect(ctx, {
     x: CLOUD_X + GAP,
     y: CLOUD_Y + GAP,
