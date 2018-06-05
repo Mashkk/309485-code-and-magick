@@ -48,7 +48,6 @@ var getColor = function (name) {
 };
 
 window.renderStatistics = function (ctx, names, times) {
-  console.log(JSON.stringify({names, times}))
   renderRect(ctx, {
     x: CLOUD_X + GAP,
     y: CLOUD_Y + GAP,
@@ -85,7 +84,7 @@ window.renderStatistics = function (ctx, names, times) {
     });
 
     renderText(ctx, {
-      text: Math.round(times[i]) + "",
+      text: Math.round(times[i]) + '',
       x: x,
       y: y - TEXT_GAP
     });
